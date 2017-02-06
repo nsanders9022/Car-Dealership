@@ -11,6 +11,7 @@ namespace CarDealership
         private string _MakeModel;
         private int _Price;
         private int _Miles;
+        private string _Message;
 
         public void SetMakeModel(string newMakeModel)
         {
@@ -43,10 +44,21 @@ namespace CarDealership
         }
 
 
-        public Car(string carMakeModel, int carPrice, int carMileage=20000)
+        public void SetMessage(string newMessage)
+        {
+            _Message = newMessage;
+        }
+
+        public string GetMessage()
+        {
+            return _Message;
+        }
+
+        public Car(string carMakeModel, int carPrice, string carMessage, int carMileage = 20000)
         {
             _MakeModel = carMakeModel;
             _Price = carPrice;
+            _Message = carMessage;
             _Miles = carMileage;
         }
 
@@ -60,16 +72,17 @@ namespace CarDealership
     {
         public static void Main()
         {
-            Car porsche = new Car("2014 Porsche 911", 114991, 7864);
-            Car ford = new Car("2011 Ford F450", 55995, 14241);
-            Car lexus = new Car("2013 Lexus RX 350", 44700);
-            Car mercedes = new Car("Mercedes Benz CLS550", 39900, 37979);
+            Car porsche = new Car("2014 Porsche 911", 114991, "This is a super expensive car", 7864);
+            Car ford = new Car("2011 Ford F450", 55995, "big truck", 14241);
+            Car lexus = new Car("2013 Lexus RX 350", 44700, "fancy fancy");
+            Car mercedes = new Car("Mercedes Benz CLS550", 39900, "mercedes", 37979);
 
             List<Car> Cars = new List<Car>() { porsche, ford, lexus, mercedes };
 
             foreach(Car automobile in Cars)
             {
                 Console.WriteLine(automobile.GetMakeModel());
+                Console.WriteLine(automobile.GetMessage());
             }
 
             Console.WriteLine("Enter maximum price: ");
@@ -90,10 +103,19 @@ namespace CarDealership
                 }
             }
 
-            foreach (Car automobile in CarsMatchingSearch)
+            if (CarsMatchingSearch.Count == 0)
             {
-                Console.WriteLine(automobile.GetMakeModel());
+                Console.WriteLine("No matches found");
             }
+            else
+            {
+                foreach (Car automobile in CarsMatchingSearch)
+                {
+                    Console.WriteLine(automobile.GetMakeModel());
+                }
+            }
+
+            
         }
     }
 
