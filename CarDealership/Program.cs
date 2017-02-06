@@ -11,6 +11,11 @@ namespace CarDealership
         public string MakeModel;
         public int Price;
         public int Miles;
+
+        public bool WorthBuying(int maxPrice, int maxMileage)
+        {
+            return (Price < maxPrice && Miles < maxMileage);
+        }
     }
 
     public class Program
@@ -56,7 +61,7 @@ namespace CarDealership
 
             foreach (Car automobile in Cars)
             {
-                if (automobile.Price < maxPrice && automobile.Miles < maxMileage)
+                if (automobile.WorthBuying(maxPrice,maxMileage))
                 {
                     CarsMatchingSearch.Add(automobile);
                 }
